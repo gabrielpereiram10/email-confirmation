@@ -12,10 +12,9 @@ public class AuthUseCase {
 
     public void execute(UserDTO dto) {
         UserDTO user = repository.findByEmail(dto.getEmail());
-        if (user == null) {
-            throw new NotFoundException("Email inválido.");
-        }
+        if (user == null) throw new NotFoundException("Email inválido.");
 
-        throw new InvalidPasswordException();
+        boolean invalidPassword = !passwordChecker.check(user.getPassword(), dto.getPassword());
+        if (invalidPassword) throw new InvalidPasswordException();
     }
 }
