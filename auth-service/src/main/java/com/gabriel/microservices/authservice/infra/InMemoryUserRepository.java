@@ -3,9 +3,31 @@ package com.gabriel.microservices.authservice.infra;
 import com.gabriel.microservices.authservice.application.IUserRepository;
 import com.gabriel.microservices.authservice.application.UserDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class InMemoryUserRepository implements IUserRepository {
+
+    private final List<UserDTO> users;
+
+    public InMemoryUserRepository() {
+        this.users = new ArrayList<>();
+    }
+
+    public InMemoryUserRepository(List<UserDTO> users) {
+        this.users = users;
+    }
+
     @Override
     public UserDTO findByEmail(String email) {
-        return null;
+        try {
+            return users.stream()
+                    .filter(user -> user.getEmail().equals(email))
+                    .collect(Collectors.toList())
+                    .get(0);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }

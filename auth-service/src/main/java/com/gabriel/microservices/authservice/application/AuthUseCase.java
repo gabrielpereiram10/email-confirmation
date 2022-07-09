@@ -3,8 +3,10 @@ package com.gabriel.microservices.authservice.application;
 public class AuthUseCase {
     
     private final IUserRepository repository;
-    public AuthUseCase(IUserRepository repository) {
+    private final HashChecker passwordChecker;
+    public AuthUseCase(IUserRepository repository, HashChecker passwordChecker) {
         this.repository = repository;
+        this.passwordChecker = passwordChecker;
     }
 
 
@@ -13,5 +15,7 @@ public class AuthUseCase {
         if (user == null) {
             throw new NotFoundException("Email inválido.");
         }
+
+        throw new InvalidPasswordException();
     }
 }
