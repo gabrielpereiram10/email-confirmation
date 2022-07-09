@@ -9,6 +9,9 @@ public class AuthUseCase {
 
 
     public void execute(UserDTO dto) {
-        throw new NotFound("Email inválido.");
+        UserDTO user = repository.findByEmail(dto.getEmail());
+        if (user == null) {
+            throw new NotFound("Email inválido.");
+        }
     }
 }
