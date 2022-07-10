@@ -22,11 +22,23 @@ public class AuthUseCaseTest {
 
     @Test
     void naoDeveriaPermitirSenhaDiferenteDaSenhaCadastrada() {
-        List<UserDTO> users = new ArrayList<>(Collections.singletonList(new UserDTO("email@gmail.com", "654321")));
+        HashAdapter hashAdapter = new HashAdapter();
+        String hashedPassword = hashAdapter.generate("654321");
+        List<UserDTO> users = new ArrayList<>(Collections.singletonList(new UserDTO("email@gmail.com", hashedPassword)));
         IUserRepository repository = new InMemoryUserRepository(users);
-        HashChecker passwordChecker = new HashAdapter();
-        AuthUseCase usecase = new AuthUseCase(repository, passwordChecker);
+        AuthUseCase usecase = new AuthUseCase(repository, hashAdapter);
         UserDTO user = new UserDTO("email@gmail.com", "123456");
         assertThrows(InvalidPasswordException.class, () -> usecase.execute(user));
+    }
+
+    @Test
+    void naoDeveriaPermitirUsuariaComEmailNaoConfirmado() {
+        HashAdapter hashAdapter = new HashAdapter();
+        String hashedPassword = hashAdapter.generate("654321");
+        List<UserDTO> users = new ArrayList<>(Collections.singletonList(new UserDTO("email@gmail.com", hashedPassword, UserState.INACTIVE)));
+        IUserRepository repository = new InMemoryUserRepository(users);
+        AuthUseCase usecase = new AuthUseCase(repository, hashAdapter);
+        UserDTO user = new UserDTO("email@gmail.com", "654321");
+        assertThrows(UnconfirmedEmailException.class, () -> usecase.execute(user));
     }
 }
