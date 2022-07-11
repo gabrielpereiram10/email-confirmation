@@ -1,6 +1,6 @@
 package com.gabriel.microservices.authservice.infra;
 
-import com.gabriel.microservices.authservice.application.IUserRepository;
+import com.gabriel.microservices.authservice.application.contracts.IUserRepository;
 import com.gabriel.microservices.authservice.application.UserDTO;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.gabriel.microservices.authservice.application;
+package com.gabriel.microservices.authservice.application.contracts;
 
 public interface HashChecker {
 
