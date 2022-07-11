@@ -1,5 +1,11 @@
 package com.gabriel.microservices.authservice.application;
 
+import com.gabriel.microservices.authservice.application.contracts.HashChecker;
+import com.gabriel.microservices.authservice.application.contracts.IUserRepository;
+import com.gabriel.microservices.authservice.application.exceptions.InvalidPasswordException;
+import com.gabriel.microservices.authservice.application.exceptions.NotFoundException;
+import com.gabriel.microservices.authservice.application.exceptions.UnconfirmedEmailException;
+
 public class AuthUseCase {
     
     private final IUserRepository repository;
