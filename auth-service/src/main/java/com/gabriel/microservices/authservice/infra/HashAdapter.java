@@ -1,4 +1,6 @@
-package com.gabriel.microservices.authservice.application;
+package com.gabriel.microservices.authservice.infra;
+
+import com.gabriel.microservices.authservice.application.contracts.HashChecker;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
