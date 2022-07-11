@@ -23,6 +23,6 @@ public class AuthUseCase {
         boolean invalidPassword = !passwordChecker.check(user.getPassword(), dto.getPassword());
         if (invalidPassword) throw new InvalidPasswordException();
 
-        throw new UnconfirmedEmailException();
+        if (user.getState() != UserState.ACTIVE) throw new UnconfirmedEmailException();
     }
 }
