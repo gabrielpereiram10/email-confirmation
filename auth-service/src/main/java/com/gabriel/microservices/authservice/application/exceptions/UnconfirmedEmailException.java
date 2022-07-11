@@ -1,4 +1,4 @@
-package com.gabriel.microservices.authservice.application;
+package com.gabriel.microservices.authservice.application.exceptions;
 
 public class UnconfirmedEmailException extends RuntimeException {
 
