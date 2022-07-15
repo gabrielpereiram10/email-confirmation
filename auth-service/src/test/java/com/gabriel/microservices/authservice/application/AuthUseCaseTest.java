@@ -5,8 +5,8 @@ import com.gabriel.microservices.authservice.application.contracts.IUserReposito
 import com.gabriel.microservices.authservice.application.exceptions.InvalidPasswordException;
 import com.gabriel.microservices.authservice.application.exceptions.NotFoundException;
 import com.gabriel.microservices.authservice.application.exceptions.UnconfirmedEmailException;
-import com.gabriel.microservices.authservice.infra.HashAdapter;
-import com.gabriel.microservices.authservice.infra.InMemoryUserRepository;
+import com.gabriel.microservices.authservice.infra.adapters.HashAdapter;
+import com.gabriel.microservices.authservice.infra.adapters.InMemoryUserRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

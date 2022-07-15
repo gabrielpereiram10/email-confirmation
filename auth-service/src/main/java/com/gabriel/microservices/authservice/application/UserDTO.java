@@ -1,8 +1,15 @@
 package com.gabriel.microservices.authservice.application;
 
+import javax.validation.constraints.NotNull;
+
 public class UserDTO {
+
+    @NotNull
     private String email, password;
     private UserState state;
+
+    public UserDTO() {
+    }
 
     public UserDTO(String email, String password, UserState state) {
         this(email, password);

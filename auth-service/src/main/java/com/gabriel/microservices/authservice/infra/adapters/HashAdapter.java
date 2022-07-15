@@ -1,4 +1,4 @@
-package com.gabriel.microservices.authservice.infra;
+package com.gabriel.microservices.authservice.infra.adapters;
 
 import com.gabriel.microservices.authservice.application.contracts.HashChecker;
 
