@@ -13,6 +13,12 @@ public class Email {
         this.value = email;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Email anotherEmail = (Email) obj;
+        return value.equals(anotherEmail.value);
+    }
+
     public String getValue() {
         return value;
     }
