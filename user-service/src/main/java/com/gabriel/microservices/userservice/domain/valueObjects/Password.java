@@ -6,7 +6,11 @@ public class Password {
 
     private final String value;
     public Password(String password) {
-        throw new InvalidFieldException("senha", "Senha deve conter pelo menos 6 caracteres.");
+        if (password.length() < 6) {
+            throw new InvalidFieldException("senha", "Senha deve conter pelo menos 6 caracteres.");
+        }
+
+        this.value = password;
     }
 
     public String getValue() {
