@@ -13,7 +13,7 @@ public class UserDTO {
         this.password = password;
     }
 
-    protected User buildUser() {
+    protected User buildEntity() {
         return new User(username, new Email(email), new Password(password));
     }
 

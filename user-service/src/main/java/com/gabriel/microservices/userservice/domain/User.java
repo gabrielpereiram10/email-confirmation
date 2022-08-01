@@ -15,6 +15,12 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        User anotherUser = (User) obj;
+        return email.equals(anotherUser.email) || username.equals(anotherUser.username);
+    }
+
     public String getUsername() {
         return username;
     }

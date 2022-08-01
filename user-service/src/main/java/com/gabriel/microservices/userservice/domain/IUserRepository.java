@@ -6,6 +6,5 @@ import java.util.Optional;
 
 public interface IUserRepository {
 
-    Optional<User> find(Email email);
-    Optional<User> find(String username);
+    Optional<User> find(User user);
 }

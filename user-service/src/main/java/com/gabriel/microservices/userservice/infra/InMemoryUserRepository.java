@@ -16,16 +16,9 @@ public class InMemoryUserRepository implements IUserRepository {
     }
 
     @Override
-    public Optional<User> find(Email email) {
+    public Optional<User> find(User user) {
         return users.stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst();
-    }
-
-    @Override
-    public Optional<User> find(String username) {
-        return users.stream()
-                .filter(user -> user.getUsername().equals(username))
+                .filter(item -> item.equals(user))
                 .findFirst();
     }
 }
