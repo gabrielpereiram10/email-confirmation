@@ -5,4 +5,6 @@ import com.gabriel.microservices.userservice.domain.valueObjects.Email;
 public interface IUserRepository {
 
     boolean existsByEmail(Email email);
+
+    void save(User user);
 }

@@ -1,6 +1,8 @@
 package com.gabriel.microservices.userservice.application;
 
 import com.gabriel.microservices.userservice.ApplicationTestConfig;
+import com.gabriel.microservices.userservice.application.contracts.Encoder;
+import com.gabriel.microservices.userservice.application.contracts.MailSender;
 import com.gabriel.microservices.userservice.domain.IUserRepository;
 import com.gabriel.microservices.userservice.domain.valueObjects.Email;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,11 +19,17 @@ public class RegisterUserUseCaseTest extends ApplicationTestConfig {
     @MockBean
     private IUserRepository repository;
 
+    @MockBean
+    private Encoder encoder;
+
+    @MockBean
+    private MailSender mailSender;
+
     private RegisterUserUseCase sut;
 
     @BeforeEach
     void setUp() {
-        sut = new RegisterUserUseCase(repository);
+        sut = new RegisterUserUseCase(repository, encoder, mailSender);
     }
 
     @Test
@@ -29,7 +37,7 @@ public class RegisterUserUseCaseTest extends ApplicationTestConfig {
     void naoDevePermitirUsuarioComEmailJaCadastrado() {
         String password = "aaAA22";
         Email email = new Email("email_cadastrado@gmail.com");
-        UserDTO userWithEmailAlreadyRegistered = new UserDTO(
+        RegisterUserDTO userWithEmailAlreadyRegistered = new RegisterUserDTO(
                 "username",
                 "email_cadastrado@gmail.com",
                 password,

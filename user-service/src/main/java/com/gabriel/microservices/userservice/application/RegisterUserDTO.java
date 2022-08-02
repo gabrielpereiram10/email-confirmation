@@ -4,18 +4,18 @@ import com.gabriel.microservices.userservice.domain.User;
 import com.gabriel.microservices.userservice.domain.valueObjects.Email;
 import com.gabriel.microservices.userservice.domain.valueObjects.Password;
 
-public class UserDTO {
+public class RegisterUserDTO {
 
     private String name, email;
     private Password password, confirmationPassword;
-    public UserDTO(String name, String email, String password, String confirmationPassword) {
+    public RegisterUserDTO(String name, String email, String password, String confirmationPassword) {
         this.name = name;
         this.email = email;
         this.password = new Password(password);
         this.confirmationPassword = new Password(confirmationPassword);
     }
 
-    protected User buildEntity() {
+    User buildEntity() {
         return new User(name, new Email(email));
     }
 
