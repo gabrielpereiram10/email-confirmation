@@ -1,32 +1,42 @@
 package com.gabriel.microservices.userservice.domain;
 
-import com.gabriel.microservices.userservice.application.UserDTO;
 import com.gabriel.microservices.userservice.domain.valueObjects.Email;
 import com.gabriel.microservices.userservice.domain.valueObjects.Password;
 
+import java.util.Objects;
+
 public class User {
-    private String username;
+    private String name;
     private Email email;
     private Password password;
 
-    public User(String username, Email email, Password password) {
-        this.username = username;
+    public User(String name, Email email) {
+        this.name = name;
         this.email = email;
-        this.password = password;
+    }
+
+    public void confirmPassword(Password hashedPassword, Password password, Password confirmationPassword) {
+        if (!password.equals(confirmationPassword)) {
+            throw new InvalidFieldException("password", "Senhas não conferem.");
+        }
+
+        this.password = hashedPassword;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        User anotherUser = (User) obj;
-        return email.equals(anotherUser.email) || username.equals(anotherUser.username);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email);
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Email getEmail() {
@@ -39,9 +49,5 @@ public class User {
 
     public Password getPassword() {
         return password;
-    }
-
-    public void setPassword(Password password) {
-        this.password = password;
     }
 }

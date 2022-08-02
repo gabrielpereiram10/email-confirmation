@@ -1,6 +1,8 @@
 package com.gabriel.microservices.userservice.domain.valueObjects;
 
-import com.gabriel.microservices.userservice.domain.exceptions.InvalidFieldException;
+import com.gabriel.microservices.userservice.domain.InvalidFieldException;
+
+import java.util.Objects;
 
 public class Password {
 
@@ -21,6 +23,14 @@ public class Password {
         }
 
         this.value = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Password password = (Password) o;
+        return Objects.equals(value, password.value);
     }
 
     public String getValue() {

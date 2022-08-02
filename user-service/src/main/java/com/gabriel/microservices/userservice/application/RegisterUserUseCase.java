@@ -13,12 +13,9 @@ public class RegisterUserUseCase {
 
     public void execute(UserDTO dto) {
         User user = dto.buildEntity();
-        repository.find(user)
-                .ifPresent(userAlreadyExists -> {
-                    if (userAlreadyExists.getEmail().equals(user.getEmail())) {
-                        throw new UserAlreadyExistsException("email", "Email já cadastrado.");
-                    }
-                    throw new UserAlreadyExistsException("username", "Username já cadastrado.");
-                });
+        boolean userAlreadyExists = repository.existsByEmail(user.getEmail());
+        if (userAlreadyExists) {
+            throw new UserAlreadyExistsException("email", "Email já cadastrado.");
+        }
     }
 }

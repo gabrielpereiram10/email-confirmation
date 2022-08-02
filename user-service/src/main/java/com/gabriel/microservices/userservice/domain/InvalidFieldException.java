@@ -1,4 +1,4 @@
-package com.gabriel.microservices.userservice.domain.exceptions;
+package com.gabriel.microservices.userservice.domain;
 
 public class InvalidFieldException extends RuntimeException {
 

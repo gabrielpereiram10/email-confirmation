@@ -1,14 +1,17 @@
-package com.gabriel.microservices.userservice.domain;
+package com.gabriel.microservices.userservice.domain.valueObjects;
 
-import com.gabriel.microservices.userservice.domain.exceptions.InvalidFieldException;
-import com.gabriel.microservices.userservice.domain.valueObjects.Password;
+import com.gabriel.microservices.userservice.ApplicationTestConfig;
+import com.gabriel.microservices.userservice.domain.InvalidFieldException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PasswordTest {
+@DisplayName("PasswordTest")
+public class PasswordTest extends ApplicationTestConfig {
 
     @Test
+    @DisplayName("Deve conter pelo menos seis caracteres")
     void senhaDeveConterPeloMenosSeisCaracteres() {
         InvalidFieldException exception = assertThrows(InvalidFieldException.class, () -> new Password("aaaaa"));
         assertAll(
@@ -18,6 +21,7 @@ public class PasswordTest {
     }
 
     @Test
+    @DisplayName("Deve conter pelo menos uma letra maiúscula")
     void senhaDeverConterPeloMenosUmaLetraMaiuscula() {
         InvalidFieldException exception = assertThrows(InvalidFieldException.class, () -> new Password("aaaaaa"));
         assertAll(
@@ -27,6 +31,7 @@ public class PasswordTest {
     }
 
     @Test
+    @DisplayName("Deve conter pelo menos uma letra minúscula")
     void senhaDeverConterPeloMenosUmaLetraMinuscula() {
         InvalidFieldException exception = assertThrows(InvalidFieldException.class, () -> new Password("AAAAAA"));
         assertAll(

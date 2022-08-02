@@ -6,23 +6,33 @@ import com.gabriel.microservices.userservice.domain.valueObjects.Password;
 
 public class UserDTO {
 
-    private String username, email, password;
-    public UserDTO(String username, String email, String password) {
-        this.username = username;
+    private String name, email;
+    private Password password, confirmationPassword;
+    public UserDTO(String name, String email, String password, String confirmationPassword) {
+        this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = new Password(password);
+        this.confirmationPassword = new Password(confirmationPassword);
     }
 
     protected User buildEntity() {
-        return new User(username, new Email(email), new Password(password));
+        return new User(name, new Email(email));
     }
 
-    public String getUsername() {
-        return username;
+    public Password getConfirmationPassword() {
+        return confirmationPassword;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setConfirmationPassword(Password confirmationPassword) {
+        this.confirmationPassword = confirmationPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -33,11 +43,11 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getPassword() {
+    public Password getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Password password) {
         this.password = password;
     }
 }
