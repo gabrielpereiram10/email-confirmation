@@ -10,20 +10,21 @@ public class User {
     private String name;
     private Email email;
     private Password password;
-    private UUID emailConfirmationToken;
+    private String hashedPassword;
+    private String emailConfirmationToken;
 
     public User(String name, Email email) {
         this.name = name;
         this.email = email;
-        this.emailConfirmationToken = UUID.randomUUID();
+        this.emailConfirmationToken = UUID.randomUUID().toString();
     }
 
-    public void confirmPassword(Password hashedPassword, Password password, Password confirmationPassword) {
+    public void confirmPassword(String hashedPassword, Password password, Password confirmationPassword) {
         if (!password.equals(confirmationPassword)) {
             throw new InvalidFieldException("password", "Senhas não conferem.");
         }
 
-        this.password = hashedPassword;
+        this.hashedPassword = hashedPassword;
     }
 
     @Override
@@ -34,12 +35,26 @@ public class User {
         return Objects.equals(email, user.email);
     }
 
-    public UUID getEmailConfirmationToken() {
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public String getEmailConfirmationToken() {
         return emailConfirmationToken;
     }
 
-    public void setEmailConfirmationToken(UUID emailConfirmationToken) {
+    public void setEmailConfirmationToken(String emailConfirmationToken) {
         this.emailConfirmationToken = emailConfirmationToken;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email=" + email +
+                ", password=" + password +
+                ", emailConfirmationToken=" + emailConfirmationToken +
+                '}';
     }
 
     public String getName() {

@@ -2,12 +2,9 @@ package com.gabriel.microservices.userservice.application;
 
 import com.gabriel.microservices.userservice.domain.User;
 
-import java.util.UUID;
-
 public class MailSenderDTO {
 
-    private String receiverName, receiverEmail;
-    private UUID confirmationKey;
+    private String receiverName, receiverEmail, confirmationKey;
 
     protected MailSenderDTO(User user) {
         this.receiverName = user.getName();
@@ -31,11 +28,11 @@ public class MailSenderDTO {
         this.receiverEmail = receiverEmail;
     }
 
-    public UUID getConfirmationKey() {
+    public String getConfirmationKey() {
         return confirmationKey;
     }
 
-    public void setConfirmationKey(UUID confirmationKey) {
+    public void setConfirmationKey(String confirmationKey) {
         this.confirmationKey = confirmationKey;
     }
 }

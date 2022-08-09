@@ -2,28 +2,26 @@ package com.gabriel.microservices.userservice.application;
 
 import com.gabriel.microservices.userservice.domain.User;
 import com.gabriel.microservices.userservice.domain.valueObjects.Email;
-import com.gabriel.microservices.userservice.domain.valueObjects.Password;
 
 public class RegisterUserDTO {
 
-    private String name, email;
-    private Password password, confirmationPassword;
+    private String name, email, password, confirmationPassword;
     public RegisterUserDTO(String name, String email, String password, String confirmationPassword) {
         this.name = name;
         this.email = email;
-        this.password = new Password(password);
-        this.confirmationPassword = new Password(confirmationPassword);
+        this.password = password;
+        this.confirmationPassword = confirmationPassword;
     }
 
-    User buildEntity() {
+    protected User buildEntity() {
         return new User(name, new Email(email));
     }
 
-    public Password getConfirmationPassword() {
+    public String getConfirmationPassword() {
         return confirmationPassword;
     }
 
-    public void setConfirmationPassword(Password confirmationPassword) {
+    public void setConfirmationPassword(String confirmationPassword) {
         this.confirmationPassword = confirmationPassword;
     }
 
@@ -43,11 +41,11 @@ public class RegisterUserDTO {
         this.email = email;
     }
 
-    public Password getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Password password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

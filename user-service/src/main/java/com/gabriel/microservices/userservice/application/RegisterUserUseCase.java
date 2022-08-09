@@ -25,8 +25,12 @@ public class RegisterUserUseCase {
             throw new UserAlreadyExistsException("email", "Email já cadastrado.");
         }
 
-        String hashedPassword = encoder.encode(user.getPassword().getValue());
-        user.confirmPassword(new Password(hashedPassword), dto.getPassword(), dto.getConfirmationPassword());
+        String hashedPassword = encoder.encode(dto.getPassword());
+        user.confirmPassword(
+                hashedPassword,
+                new Password(dto.getPassword()),
+                new Password(dto.getConfirmationPassword())
+        );
         repository.save(user);
         mailSender.send(new MailSenderDTO(user));
     }
